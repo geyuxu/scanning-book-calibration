@@ -32,16 +32,28 @@
 <!--    <script src="/js/jquery.shortcuts.min.js"/>-->
 </head>
 <body>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=1'}" /></div><div class="b"><input type="file" multiple name="upload"><input type="file" multiple name="upload"></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=2'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=3'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=4'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=5'}" /></div>
+<!--<form method="POST" action="/upload" enctype="multipart/form-data">-->
+<!--    <input type="file" name="file" /><br/><br/>-->
+<!--    <input type="submit" value="Submit" />-->
+<!--</form>-->
+<div class="a left"><img th:src="@{'/img?page='+${page}+'&index=1'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm1"><input type="file" multiple name="files"><input id="btnImportOK1" type="button" value="上传" /></form></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=2'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm2"><input type="file" multiple name="files"><input id="btnImportOK2" type="button" value="上传" /></form></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=3'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm3"><input type="file" multiple name="files"><input id="btnImportOK3" type="button" value="上传" /></form></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=4'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm4"><input type="file" multiple name="files"><input id="btnImportOK4" type="button" value="上传" /></form></div>
+<div class="a right"><img th:src="@{'/img?page='+${page}+'&index=5'}" /></div>
 
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm5"><input type="file" multiple name="files"><input id="btnImportOK5" type="button" value="上传" /></form></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm6"><input type="file" multiple name="files"><input id="btnImportOK6" type="button" value="上传" /></form></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm7"><input type="file" multiple name="files"><input id="btnImportOK7" type="button" value="上传" /></form></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div>
+<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm8"><input type="file" multiple name="files"><input id="btnImportOK8" type="button" value="上传" /></form></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=10'}" /></div>
 
 
@@ -57,22 +69,56 @@
         return(false);
     }
 
-    document.addEventListener('click', function (e) {
-        var pageidx = new Number(getQueryVariable('page'));
-        const leftInstance = e.screenX;
-        const rightInstance = e.screenY;
-        const screenWidth = window.innerWidth;
-        if(pageidx <= 0) pageidx = 1;
-        if (leftInstance < (screenWidth / 2)) {
-            pageidx = pageidx - 1;
-        } else {
-            pageidx = pageidx + 1;
+    function getStrVariable(str,variable)
+    {
+        str = str.split("?")[1];
+        var query = str;
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
         }
-        if(pageidx <= 0) pageidx = 1;
-        window.location.href="/?page="+pageidx;
-    }, false);
+        return(false);
+    }
 
 
-</script>
+    $(document).ready(function () {
+        var pageidx = new Number(getQueryVariable('page'));
+        $(".left").click(function(){
+            pageidx = pageidx - 1;
+            if(pageidx <= 0) pageidx = 1;
+            window.location.href="/?page="+pageidx;
+        });
+        $(".right").click(function(){
+            pageidx = pageidx + 1;
+            window.location.href="/?page="+pageidx;
+        });
+    });
+    $(document).ready(function () {
+        for(var i=1;i<=8;i++){
+            $("#btnImportOK"+i).click(function (){
+
+                //http://localhost:8080/img?page=5&index=4
+                var imgSrc = $(this).parent().parent().prev().children()[0].src;
+                var page = new Number(getStrVariable(imgSrc,"page"));
+                var index = new Number(getStrVariable(imgSrc,"index"));
+                var idx = (page - 1) * 10 + index;
+                var formData = new FormData($(this).parent()[0]);
+                $.ajax({
+                    type: "POST",
+                    data: formData,
+                    url: "/upload?idx="+idx,
+                    contentType: false,
+                    processData: false,
+                });
+            });
+        }
+
+    });
+
+
+     </script>
+
+
 </body>
 </html>
