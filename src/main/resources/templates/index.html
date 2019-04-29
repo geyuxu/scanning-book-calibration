@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        .a{
+            width: 320px;
+            height:480px;
+            float:left;
+            overflow: hidden;
+
+        }
+        .b {
+            background-color: aqua;
+            width: 65px;
+            height:480px;
+            float:left;
+            overflow: hidden;
+
+        }
+        /*.red {*/
+        /*    background-color: red;*/
+        /*}*/
+        /*.blue {*/
+        /*    background-color: blue;*/
+        /*}*/
+        img{max-height:480px;_height:expression(this.height > 480 ? "480px" : this.width);}
+    </style>
+
+    <script src="/js/jquery-3.4.0.min.js"></script>
+<!--    <script src="/js/jquery.shortcuts.min.js"/>-->
+</head>
+<body>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=1'}" /></div><div class="b"><input type="file" multiple name="upload"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=2'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=3'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=4'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=5'}" /></div>
+
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div><div class="b"><input type="file" multiple name="upload"></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=10'}" /></div>
+
+
+<script>
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    document.addEventListener('click', function (e) {
+        var pageidx = new Number(getQueryVariable('page'));
+        const leftInstance = e.screenX;
+        const rightInstance = e.screenY;
+        const screenWidth = window.innerWidth;
+        if(pageidx <= 0) pageidx = 1;
+        if (leftInstance < (screenWidth / 2)) {
+            pageidx = pageidx - 1;
+        } else {
+            pageidx = pageidx + 1;
+        }
+        if(pageidx <= 0) pageidx = 1;
+        window.location.href="/?page="+pageidx;
+    }, false);
+
+
+</script>
+</body>
+</html>
