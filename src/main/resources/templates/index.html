@@ -13,12 +13,34 @@
         }
         .b {
             background-color: aqua;
-            width: 65px;
+            width: 45px;
             height:480px;
             float:left;
             overflow: hidden;
 
         }
+        /* This parent can be any width and height */
+        .block {
+            text-align: center;
+        }
+
+        /* The ghost, nudged to maintain perfect centering */
+        .block:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -0.25em; /* Adjusts for spacing */
+        }
+
+        /* The element to be centered, can
+           also be of any width and height */
+        .centered {
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+        }
+        .b:hover{ background:yellow;}
         /*.red {*/
         /*    background-color: red;*/
         /*}*/
@@ -29,34 +51,36 @@
     </style>
 
     <script src="/js/jquery-3.4.0.min.js"></script>
-<!--    <script src="/js/jquery.shortcuts.min.js"/>-->
 </head>
 <body>
-<!--<form method="POST" action="/upload" enctype="multipart/form-data">-->
-<!--    <input type="file" name="file" /><br/><br/>-->
-<!--    <input type="submit" value="Submit" />-->
-<!--</form>-->
+
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',1)'}" ><div class="centered">+</div></div>
 <div class="a left"><img th:src="@{'/img?page='+${page}+'&index=1'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm1"><input type="file" multiple name="files"><input id="btnImportOK1" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',2)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=2'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm2"><input type="file" multiple name="files"><input id="btnImportOK2" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',3)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=3'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm3"><input type="file" multiple name="files"><input id="btnImportOK3" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',4)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=4'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm4"><input type="file" multiple name="files"><input id="btnImportOK4" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',1)'}" ><div class="centered">+</div></div>
 <div class="a right"><img th:src="@{'/img?page='+${page}+'&index=5'}" /></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',5)'}" ><div class="centered">+</div></div>
 
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',6)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm5"><input type="file" multiple name="files"><input id="btnImportOK5" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',7)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm6"><input type="file" multiple name="files"><input id="btnImportOK6" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',8)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm7"><input type="file" multiple name="files"><input id="btnImportOK7" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',9)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div>
-<div class="b"><form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm8"><input type="file" multiple name="files"><input id="btnImportOK8" type="button" value="上传" /></form></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',10)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=10'}" /></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',11)'}" ><div class="centered">+</div></div>
 
-
+<form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm">
+    <input id="fileBox" type="file" multiple name="files" hidden="hidden">
+</form>
 <script>
     function getQueryVariable(variable)
     {
@@ -94,27 +118,20 @@
             window.location.href="/?page="+pageidx;
         });
     });
-    $(document).ready(function () {
-        for(var i=1;i<=8;i++){
-            $("#btnImportOK"+i).click(function (){
 
-                //http://localhost:8080/img?page=5&index=4
-                var imgSrc = $(this).parent().parent().prev().children()[0].src;
-                var page = new Number(getStrVariable(imgSrc,"page"));
-                var index = new Number(getStrVariable(imgSrc,"index"));
-                var idx = (page - 1) * 10 + index;
-                var formData = new FormData($(this).parent()[0]);
-                $.ajax({
-                    type: "POST",
-                    data: formData,
-                    url: "/upload?idx="+idx,
-                    contentType: false,
-                    processData: false,
-                });
+    function uploadImgs(page,index){
+        console.log(page+' '+index);
+        $("#fileBox").click().change(function () {
+            var formData = new FormData($("#uploadForm")[0]);
+            $.ajax({
+                type: "POST",
+                data: formData,
+                url: "/upload?idx="+index,
+                contentType: false,
+                processData: false,
             });
-        }
-
-    });
+        });
+    }
 
 
      </script>
