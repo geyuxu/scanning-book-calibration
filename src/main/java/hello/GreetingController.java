@@ -14,7 +14,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static hello.Calibra.FILE_PATH;
@@ -97,8 +99,13 @@ public class GreetingController {
         return "index";
     }
 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    String dateStr = sdf.format(new Date());
+
     @GetMapping("/save")
     public String save() throws IOException {
+
+
         File d = new File(FILE_PATH);
         String[] content = d.list();
         for(String name : content) {
@@ -111,7 +118,7 @@ public class GreetingController {
 
         Integer i = 0;
         for(byte[] bytes:jpgList){
-            Path path = Paths.get(FILE_PATH+"/BOOK_" + addZeroForNum(i.toString(),getNumLenght(jpgList.size())) + ".jpg");
+            Path path = Paths.get(FILE_PATH+"/BOOKPAGE_"+dateStr+"_" + addZeroForNum(i.toString(),getNumLenght(jpgList.size())) + ".jpg");
             Files.write(path, bytes);
             i++;
         }
