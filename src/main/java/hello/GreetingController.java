@@ -93,11 +93,12 @@ public class GreetingController {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+        this.save();
         return "index";
     }
 
     @GetMapping("/save")
-    public String save(@RequestParam(name="page", required=false, defaultValue="1") String page,Model model) throws IOException {
+    public String save() throws IOException {
         File d = new File(FILE_PATH);
         String[] content = d.list();
         for(String name : content) {
@@ -115,8 +116,6 @@ public class GreetingController {
             i++;
         }
 
-
-        model.addAttribute("page", page);
         return "index";
     }
 
@@ -138,5 +137,12 @@ public class GreetingController {
         }
 
         return str;
+    }
+
+    @GetMapping("/removeImg")
+    public String removeImg(@RequestParam(name="idx") int idx,Model model) throws IOException {
+        jpgList.remove(idx);
+        this.save();
+        return "index";
     }
 }
