@@ -66,17 +66,17 @@
 <div class="a right"><img th:src="@{'/img?page='+${page}+'&index=5'}" /></div>
 <div class="b block" th:onclick="@{'uploadImgs('+${page}+',5)'}" ><div class="centered">+</div></div>
 
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',6)'}" ><div class="centered">+</div></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',5)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div>
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',7)'}" ><div class="centered">+</div></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',6)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div>
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',8)'}" ><div class="centered">+</div></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',7)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div>
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',9)'}" ><div class="centered">+</div></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',8)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div>
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',10)'}" ><div class="centered">+</div></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',9)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=10'}" /></div>
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',11)'}" ><div class="centered">+</div></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',10)'}" ><div class="centered">+</div></div>
 
 <form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm">
     <input id="fileBox" type="file" multiple name="files" hidden="hidden">
@@ -121,12 +121,13 @@
 
     function uploadImgs(page,index){
         console.log(page+' '+index);
+        var idx = (page - 1) * 10 + index;
         $("#fileBox").click().change(function () {
             var formData = new FormData($("#uploadForm")[0]);
             $.ajax({
                 type: "POST",
                 data: formData,
-                url: "/upload?idx="+index,
+                url: "/upload?idx="+idx,
                 contentType: false,
                 processData: false,
                 success:(function (data) {
