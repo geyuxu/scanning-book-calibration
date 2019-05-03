@@ -12,7 +12,7 @@
 
         }
         .b {
-            background-color: aqua;
+            /*background-color: aqua;*/
             width: 45px;
             height:480px;
             float:left;
@@ -129,6 +129,9 @@
                 url: "/upload?idx="+index,
                 contentType: false,
                 processData: false,
+                success:(function (data) {
+                    window.location.href="/?page="+page;
+                })
             });
         });
     }
