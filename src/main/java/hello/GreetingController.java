@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static hello.Calibra.FILE_PATH;
 import static hello.Calibra.jpgList;
 
 @Controller
@@ -93,5 +94,49 @@ public class GreetingController {
 //            e.printStackTrace();
 //        }
         return "index";
+    }
+
+    @GetMapping("/save")
+    public String save(@RequestParam(name="page", required=false, defaultValue="1") String page,Model model) throws IOException {
+        File d = new File(FILE_PATH);
+        String[] content = d.list();
+        for(String name : content) {
+            File temp = new File(FILE_PATH,name);
+
+            if (!temp.delete()) {//直接删除文件
+                System.err.println("Failed to delete " + name);
+            }
+        }
+
+        Integer i = 0;
+        for(byte[] bytes:jpgList){
+            Path path = Paths.get(FILE_PATH+"/BOOK_" + addZeroForNum(i.toString(),getNumLenght(jpgList.size())) + ".jpg");
+            Files.write(path, bytes);
+            i++;
+        }
+
+
+        model.addAttribute("page", page);
+        return "index";
+    }
+
+    private static int getNumLenght(long num){
+        num = num>0?num:-num;
+        return String.valueOf(num).length();
+
+    }
+    public static String addZeroForNum(String str,int strLength) {
+        int strLen =str.length();
+        if (strLen <strLength) {
+            while (strLen< strLength) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("0").append(str);//左补0
+//    sb.append(str).append("0");//右补0
+                str= sb.toString();
+                strLen= str.length();
+            }
+        }
+
+        return str;
     }
 }
