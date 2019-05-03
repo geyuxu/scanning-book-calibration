@@ -2,7 +2,7 @@ package hello;
 
 import org.springframework.stereotype.Component;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +10,30 @@ import java.util.Map;
 
 @Component
 public class Calibra {
-    public static final List<String> jpgPathList = new ArrayList<>(500);
+    //public static final List<String> jpgPathList = new ArrayList<>(500);
+//
+//    public void doSth(String path) {
+//        File file = new File(path);
+//
+//        File[] array = file.listFiles();
+//
+//
+//        for(int i=0;i<array.length;i++){
+//            if(array[i].isFile()){
+//                String filePath = array[i].getPath();
+//                String fileExtName = filePath.substring(filePath.length()-4);
+//                if (".jpg".equals(fileExtName)){
+//                    jpgPathList.add(filePath);
+//                }
+//            }
+//        }
+//    }
 
-    public void doSth(String path) {
+    //public static final Map<String,byte[]> jpgMap = new HashMap<>();
+
+    public static final List<byte[]> jpgList = new ArrayList<>(500);
+
+    public void doSth2(String path) throws IOException {
         File file = new File(path);
 
         File[] array = file.listFiles();
@@ -22,11 +43,16 @@ public class Calibra {
             if(array[i].isFile()){
                 String filePath = array[i].getPath();
                 String fileExtName = filePath.substring(filePath.length()-4);
+                byte[] b = new byte[(int)array[i].length()];
+                InputStream in=new FileInputStream(array[i]);
+                in.read(b);
                 if (".jpg".equals(fileExtName)){
-                    jpgPathList.add(filePath);
+                    jpgList.add(b);
                 }
             }
         }
+
+        System.out.println("end");
     }
 
 }

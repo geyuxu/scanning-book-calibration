@@ -22,7 +22,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if(args.length > 0)
-            calibra.doSth(args[0]);
+            calibra.doSth2(args[0]);
     }
 
 }

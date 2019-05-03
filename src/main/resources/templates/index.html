@@ -62,21 +62,21 @@
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=3'}" /></div>
 <div class="b block" th:onclick="@{'uploadImgs('+${page}+',4)'}" ><div class="centered">+</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=4'}" /></div>
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',1)'}" ><div class="centered">+</div></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',5)'}" ><div class="centered">+</div></div>
 <div class="a right"><img th:src="@{'/img?page='+${page}+'&index=5'}" /></div>
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',5)'}" ><div class="centered">+</div></div>
-
-<div class="b block" th:onclick="@{'uploadImgs('+${page}+',5)'}" ><div class="centered">+</div></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div>
 <div class="b block" th:onclick="@{'uploadImgs('+${page}+',6)'}" ><div class="centered">+</div></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div>
+
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',6)'}" ><div class="centered">+</div></div>
+<div class="a left"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div>
 <div class="b block" th:onclick="@{'uploadImgs('+${page}+',7)'}" ><div class="centered">+</div></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div>
 <div class="b block" th:onclick="@{'uploadImgs('+${page}+',8)'}" ><div class="centered">+</div></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div>
 <div class="b block" th:onclick="@{'uploadImgs('+${page}+',9)'}" ><div class="centered">+</div></div>
-<div class="a"><img th:src="@{'/img?page='+${page}+'&index=10'}" /></div>
+<div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div>
 <div class="b block" th:onclick="@{'uploadImgs('+${page}+',10)'}" ><div class="centered">+</div></div>
+<div class="a right"><img th:src="@{'/img?page='+${page}+'&index=10'}" /></div>
+<div class="b block" th:onclick="@{'uploadImgs('+${page}+',11)'}" ><div class="centered">+</div></div>
 
 <form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm">
     <input id="fileBox" type="file" multiple name="files" hidden="hidden">
