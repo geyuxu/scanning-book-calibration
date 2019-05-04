@@ -28,7 +28,7 @@
         .block:before {
             content: '';
             display: inline-block;
-            height: 95%;
+            height: 90%;
             vertical-align: middle;
             margin-right: -0.25em; /* Adjusts for spacing */
         }
@@ -56,27 +56,27 @@
 
 <div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',1)'}" >+</div></div>
 <div class="a left"><img th:src="@{'/img?page='+${page}+'&index=1'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',2)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',1)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',2)'}" >+</div><div><span th:text="@{(${page}-1)*10+1}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',1)'}">&lt;-x</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=2'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',3)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',2)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',3)'}" >+</div><div><span th:text="@{(${page}-1)*10+2}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',2)'}">&lt;-x</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=3'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',4)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',3)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',4)'}" >+</div><div><span th:text="@{(${page}-1)*10+3}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',3)'}">&lt;-x</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=4'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',5)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',4)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',5)'}" >+</div><div><span th:text="@{(${page}-1)*10+4}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',4)'}">&lt;-x</div></div>
 <div class="a right"><img th:src="@{'/img?page='+${page}+'&index=5'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',6)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',5)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',6)'}" >+</div><div><span th:text="@{(${page}-1)*10+5}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',5)'}">&lt;-x</div></div>
 
 <div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',6)'}" >+</div></div>
 <div class="a left"><img th:src="@{'/img?page='+${page}+'&index=6'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',7)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',6)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',7)'}" >+</div><div><span th:text="@{(${page}-1)*10+6}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',6)'}">&lt;-x</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=7'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',8)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',7)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',8)'}" >+</div><div><span th:text="@{(${page}-1)*10+7}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',7)'}">&lt;-x</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=8'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',9)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',8)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',9)'}" >+</div><div><span th:text="@{(${page}-1)*10+8}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',8)'}">&lt;-x</div></div>
 <div class="a"><img th:src="@{'/img?page='+${page}+'&index=9'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',10)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',9)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',10)'}" >+</div><div><span th:text="@{(${page}-1)*10+9}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',9)'}">&lt;-x</div></div>
 <div class="a right"><img th:src="@{'/img?page='+${page}+'&index=10'}" /></div>
-<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',11)'}" >+</div><div class="removed" th:onclick="@{'removeImg('+${page}+',10)'}">&lt;-x</div></div>
+<div class="b block"><div class="centered" th:onclick="@{'uploadImgs('+${page}+',11)'}" >+</div><div><span th:text="@{(${page}-1)*10+10}"></div><div class="removed" th:onclick="@{'removeImg('+${page}+',10)'}">&lt;-x</div></div>
 
 <form method="POST" action="/upload" enctype="multipart/form-data" id="uploadForm">
     <input id="fileBox" type="file" multiple name="files" hidden="hidden">
@@ -107,7 +107,28 @@
 
 
     $(document).ready(function () {
-        var pageidx = new Number(getQueryVariable('page'));
+        // var idx = new Number(getQueryVariable('idx'));
+        // if(idx!=null){
+        //     pageidx = idx / 10 + 1;
+        // }
+
+        var pageObj = getQueryVariable('page');
+        var idxObj = getQueryVariable('idx');
+
+        var pageidx;
+
+        if(idxObj){
+            var idx = new Number(idxObj);
+            pageidx = Math.floor(idx / 10) + 1;
+            window.location.href="/?page="+pageidx;
+        }else if(!pageObj){
+            pageidx = 1;
+            window.location.href="/?page="+pageidx;
+        }
+        var pageidx = new Number(pageObj);
+
+
+
         $(".left").click(function(){
             pageidx = pageidx - 1;
             if(pageidx <= 0) pageidx = 1;
@@ -145,13 +166,13 @@
 
     function uploadImgs(page,index){
         console.log(page+' '+index);
-        var idx = (page - 1) * 10 + index;
+        var idx = (page - 1) * 10 + index - 1;
         $("#fileBox").click().change(function () {
             var formData = new FormData($("#uploadForm")[0]);
             $.ajax({
                 type: "POST",
                 data: formData,
-                url: "/upload?idx="+idx,
+                url: "/upload?page="+page+"&idx=" + idx,
                 contentType: false,
                 processData: false,
                 success:(function (data) {
@@ -163,11 +184,11 @@
 
     function removeImg(page,index) {
         console.log(page + ' ' + index);
-        var idx = (page - 1) * 10 + index;
-
+        var idx = (page - 1) * 10 + index - 1;
+       // var new Number(getQueryVariable('page'));
         $.ajax({
             type: "GET",
-            url: "/removeImg?idx=" + idx,
+            url: "/removeImg?page="+page+"&idx=" + idx,
             contentType: false,
             processData: false,
             success: (function (data) {

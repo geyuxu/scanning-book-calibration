@@ -25,11 +25,7 @@ import static hello.Calibra.jpgList;
 @Controller
 public class GreetingController {
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
-    }
+
 
     @GetMapping("/img")
     public void getImg(int page,int index, HttpServletRequest httpServletRequest,
@@ -37,7 +33,7 @@ public class GreetingController {
         //byte[] imgByte = new byte[1024];
         //File file = new File(jpgList.get(page * index));
         //if(!file.exists()) return;
-        int idx = (page - 1) * 10 + index;
+        int idx = (page - 1) * 10 + index - 1;
         if(idx>=jpgList.size()){
             return;
         }
@@ -62,15 +58,20 @@ public class GreetingController {
     }
 
     @GetMapping("/")
-    public String index(@RequestParam(name="page", required=false, defaultValue="1") String page,Model model) {
-        //model.addAttribute("names", jpgList);
+    public String index(Integer page,Integer idx,Model model) {
+        if(idx!=null){
+            page = idx / 10 + 1;
+        }
+        if(page==null){
+            page = 1;
+        }
         model.addAttribute("page", page);
         return "index";
     }
 
     @PostMapping("/upload")
-    public String index(@RequestParam("files") MultipartFile[] files,Integer idx,
-                        RedirectAttributes redirectAttributes) throws IOException {
+    public String index(@RequestParam("files") MultipartFile[] files,Integer page,int idx,
+                        RedirectAttributes redirectAttributes,Model model) throws IOException {
         //MultipartFile file = files[0];
         if (files[0].isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
@@ -96,6 +97,10 @@ public class GreetingController {
 //            e.printStackTrace();
 //        }
         this.save();
+        if(page==null){
+            page = 1;
+        }
+        model.addAttribute("page", page);
         return "index";
     }
 
@@ -147,9 +152,14 @@ public class GreetingController {
     }
 
     @GetMapping("/removeImg")
-    public String removeImg(@RequestParam(name="idx") int idx,Model model) throws IOException {
+    public String removeImg(Integer page,int idx,Model model) throws IOException {
         jpgList.remove(idx);
         this.save();
+
+        if(page==null){
+            page = 1;
+        }
+        model.addAttribute("page", page);
         return "index";
     }
 }
