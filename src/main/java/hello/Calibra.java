@@ -3,10 +3,7 @@ package hello;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class Calibra {
@@ -42,6 +39,7 @@ public class Calibra {
 
         File[] array = file.listFiles();
 
+        Arrays.sort(array);
 
         for(int i=0;i<array.length;i++){
             if(array[i].isFile()){
